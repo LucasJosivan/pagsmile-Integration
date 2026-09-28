@@ -1,0 +1,246 @@
+export const PAYIN_COUNTRIES = [
+  { code: "BRA", name: "Brasil", currency: "BRL", methods: [
+    { method: "PIX", label: "PIX" },
+    { method: "PIXBiometria", label: "PIX Biometria" },
+    { method: "CreditCard", label: "Cartão de Crédito" },
+    { method: "OpenFinance", label: "Open Finance" },
+    { method: "Lottery", label: "Lottery (Casas Lotéricas)" },
+    { method: "Wallet", channel: "PicPay", label: "PicPay" },
+  ]},
+  { code: "MEX", name: "México", currency: "MXN", methods: [
+    { method: "CreditCard", label: "Cartão de Crédito" },
+    { method: "SPEI", label: "SPEI (Transferência bancária)" },
+    { method: "OXXOPay", label: "OXXOPay" },
+    { method: "Cash", label: "Dinheiro (Cash)" },
+    { method: "Wallet", channel: "Todito", label: "Todito Wallet" },
+  ]},
+  { code: "ARG", name: "Argentina", currency: "ARS", methods: [
+    { method: "DEBIN", label: "DEBIN" },
+    { method: "BankTransfer", label: "Transferência bancária" },
+    { method: "Khipu", label: "Khipu" },
+    { method: "QRCode", label: "QR Code" },
+    { method: "Rapipago", label: "Rapipago" },
+    { method: "DebitCard", label: "Cartão de Débito" },
+  ]},
+  { code: "COL", name: "Colômbia", currency: "COP", methods: [
+    { method: "Bre-B", label: "Bre-B" },
+    { method: "PSE", label: "PSE (Transferência bancária)" },
+    { method: "Transfiya", label: "Transfiya" },
+    { method: "Bancolombia", label: "Bancolombia Cash" },
+    { method: "Efecty", label: "Efecty" },
+    { method: "Gana", label: "Gana" },
+    { method: "CreditCard", label: "Cartão de Crédito" },
+    { method: "Wallet", channel: "TPaga", label: "Tpaga Wallet" },
+    { method: "Wallet", channel: "Dale", label: "Dale Wallet" },
+    { method: "Wallet", channel: "Daviplata", label: "Daviplata Wallet" },
+    { method: "Wallet", channel: "Movii", label: "Movii Wallet" },
+    { method: "Wallet", channel: "Nequi", label: "Nequi Wallet" },
+    { method: "Wallet", channel: "Rappipay", label: "Rappipay Wallet" },
+  ]},
+  { code: "CHL", name: "Chile", currency: "CLP", methods: [
+    { method: "CreditCard", label: "Cartão de Crédito" },
+    { method: "Webpay", label: "Webpay" },
+    { method: "Khipu", label: "Khipu (Transferência bancária)" },
+    { method: "BankTransfer", label: "Transferência bancária" },
+    { method: "TAPP", label: "TAPP" },
+    { method: "Wallet", channel: "Mach", label: "Mach Wallet" },
+  ]},
+  { code: "PER", name: "Peru", currency: "PEN", methods: [
+    { method: "CreditCard", label: "Cartão de Crédito" },
+    { method: "BankTransfer", label: "Transferência bancária" },
+    { method: "Cash", label: "Dinheiro (Cash)" },
+    { method: "QRCode", label: "QR Code" },
+    { method: "Pagoefectivo", label: "Pagoefectivo" },
+    { method: "Wallet", channel: "Plin", label: "Plin Wallet" },
+    { method: "Wallet", channel: "Yape", label: "Yape Wallet" },
+  ]},
+  { code: "ECU", name: "Equador", currency: "USD", methods: [
+    { method: "CreditCard", label: "Cartão de Crédito" },
+    { method: "BankTransfer", label: "Transferência bancária" },
+    { method: "Cash", label: "Dinheiro (Cash)" },
+  ]},
+  { code: "GTM", name: "Guatemala", currency: "GTQ", methods: [
+    { method: "Cash", label: "Dinheiro (Cash)" },
+  ]},
+  { code: "PAN", name: "Panamá", currency: "USD", methods: [
+    { method: "Cash", label: "Dinheiro (Cash)" },
+  ]},
+  { code: "CRI", name: "Costa Rica", currency: "CRC", methods: [
+    { method: "CreditCard", label: "Cartão de Crédito" },
+    { method: "BNCR", label: "BNCR (Transferência + Cash)" },
+    { method: "Cash", label: "Dinheiro (Cash)" },
+    { method: "SINPEMovil", label: "SINPE Móvil" },
+  ]},
+  { code: "URY", name: "Uruguai", currency: "UYU", methods: [
+    { method: "Cash", label: "Dinheiro (Cash)" },
+  ]},
+  { code: "BOL", name: "Bolívia", currency: "BOB", methods: [
+    { method: "QRCode", label: "QR Code" },
+  ]},
+  { code: "GHA", name: "Gana", currency: "GHS", methods: [
+    { method: "MOBILEMONEY", label: "Mobile Money" },
+  ]},
+  { code: "KEN", name: "Quênia", currency: "KES", methods: [
+    { method: "MOBILEMONEY", label: "Mobile Money" },
+  ]},
+  { code: "NGA", name: "Nigéria", currency: "NGN", methods: [
+    { method: "BankTransfer", label: "Transferência bancária" },
+    { method: "DebitCard", label: "Cartão de Débito" },
+  ]},
+  { code: "UGA", name: "Uganda", currency: "UGX", methods: [
+    { method: "MOBILEMONEY", label: "Mobile Money" },
+  ]},
+  { code: "CHN", name: "China", currency: "CNY", methods: [
+    { method: "Wallet", channel: "AlipayCN", label: "Alipay (CN)" },
+  ]},
+  { code: "HKG", name: "Hong Kong", currency: "HKD", methods: [
+    { method: "DiscoverCard", label: "Discover Card" },
+    { method: "Wallet", channel: "AlipayHK", label: "AlipayHK" },
+    { method: "Wallet", channel: "WechatPayHK", label: "WeChat Pay (HK)" },
+  ]},
+  { code: "JPN", name: "Japão", currency: "JPY", methods: [
+    { method: "CreditCard", label: "Cartão de Crédito" },
+    { method: "DiscoverCard", label: "Discover Card" },
+    { method: "Wallet", channel: "merpay", label: "merpay Wallet" },
+    { method: "Wallet", channel: "RKTEC", label: "Rakuten Pay" },
+  ]},
+  { code: "IDN", name: "Indonésia", currency: "IDR", methods: [
+    { method: "CreditCard", label: "Cartão de Crédito" },
+    { method: "BankTransfer", label: "Transferência bancária" },
+    { method: "AlfaGroup", label: "Alfa Group" },
+    { method: "QRIS", label: "QRIS" },
+    { method: "VirtualAccount", label: "Virtual Account" },
+    { method: "Wallet", channel: "DANA", label: "DANA Wallet" },
+    { method: "Wallet", channel: "OVO", label: "OVO Wallet" },
+    { method: "Wallet", channel: "ShopeePay", label: "ShopeePay" },
+  ]},
+  { code: "KOR", name: "Coreia do Sul", currency: "KRW", methods: [
+    { method: "BankTransfer", label: "Transferência bancária" },
+    { method: "VirtualAccount", label: "Virtual Account" },
+    { method: "Wallet", channel: "KakaoPay", label: "KakaoPay" },
+    { method: "Wallet", channel: "NaverPay", label: "NaverPay" },
+    { method: "Wallet", channel: "Payco", label: "Payco" },
+    { method: "Wallet", channel: "SamsungPay", label: "SamsungPay" },
+    { method: "Wallet", channel: "Toss", label: "Toss" },
+  ]},
+  { code: "SGP", name: "Singapura", currency: "SGD", methods: [
+    { method: "Wallet", channel: "GrabPay", label: "GrabPay" },
+    { method: "Wallet", channel: "ShopeePay", label: "ShopeePay" },
+  ]},
+  { code: "BGD", name: "Bangladesh", currency: "BDT", methods: [
+    { method: "Bkash", channel: "AssanPayBD", label: "Bkash" },
+    { method: "Nagad", channel: "AssanPayBD", label: "Nagad" },
+  ]},
+  { code: "MYS", name: "Malásia", currency: "MYR", methods: [
+    { method: "FPX", label: "FPX" },
+    { method: "Wallet", channel: "BOOST", label: "BOOST" },
+    { method: "Wallet", channel: "GrabPay", label: "GrabPay" },
+    { method: "Wallet", channel: "MCash", label: "MCash" },
+    { method: "Wallet", channel: "ShopeePay", label: "ShopeePay" },
+    { method: "Wallet", channel: "TNG", label: "Touch 'n Go" },
+  ]},
+  { code: "PHL", name: "Filipinas", currency: "PHP", methods: [
+    { method: "Wallet", channel: "BPI", label: "BPI" },
+    { method: "Wallet", channel: "GCash", label: "GCash" },
+    { method: "AlipayPlus", channel: "AlipayPlus", label: "AlipayPlus" },
+    { method: "QRPH", label: "QRPH" },
+  ]},
+  { code: "THA", name: "Tailândia", currency: "THB", methods: [
+    { method: "BankTransfer", label: "Transferência bancária" },
+    { method: "PromptPay", label: "PromptPay" },
+    { method: "Wallet", channel: "LINEPay", label: "LINE Pay" },
+    { method: "Wallet", channel: "RabbitLinePay", label: "Rabbit LINE Pay" },
+    { method: "Wallet", channel: "TrueMoney", label: "TrueMoney" },
+  ]},
+  { code: "TWN", name: "Taiwan", currency: "TWD", methods: [
+    { method: "BankTransfer", label: "Transferência bancária" },
+    { method: "OTC", label: "OTC" },
+    { method: "PostTransfer", label: "Post Transfer" },
+    { method: "Wallet", channel: "LINEPay", label: "LINE Pay" },
+    { method: "Wallet", channel: "JKOPay", label: "JKOPay" },
+  ]},
+  { code: "VNM", name: "Vietnã", currency: "VND", methods: [
+    { method: "BankTransfer", label: "Transferência bancária" },
+    { method: "Wallet", channel: "MOMO", label: "MOMO" },
+    { method: "Wallet", channel: "Zalopay", label: "Zalopay" },
+    { method: "QRCode", label: "QR Code" },
+  ]},
+  { code: "PAK", name: "Paquistão", currency: "PKR", methods: [
+    { method: "Wallet", channel: "Easypaisa", label: "Easypaisa" },
+    { method: "Wallet", channel: "JazzCash", label: "JazzCash" },
+  ]},
+  { code: "TJK", name: "Tajiquistão", currency: "TJS", methods: [
+    { method: "CreditCard", channel: "DCNext", label: "Cartão de Crédito" },
+    { method: "DebitCard", channel: "DCNext", label: "Cartão de Débito" },
+    { method: "Wallet", channel: "DCNext", label: "DCNext Wallet" },
+  ]},
+  { code: "AUS", name: "Austrália", currency: "AUD", methods: [
+    { method: "Paysafecard", label: "Paysafecard" },
+  ]},
+  { code: "TUR", name: "Turquia", currency: "TRY", methods: [
+    { method: "Troy", label: "Troy" },
+    { method: "Wallet", channel: "Papara", label: "Papara Wallet" },
+  ]},
+  { code: "BHR", name: "Bahrein", currency: "BHD", methods: [
+    { method: "CreditCard", label: "Cartão de Crédito" },
+    { method: "DebitCard", label: "Cartão de Débito" },
+    { method: "STCPAY", label: "STC Pay" },
+  ]},
+  { code: "EGY", name: "Egito", currency: "EGP", methods: [
+    { method: "CreditCard", label: "Cartão de Crédito" },
+    { method: "Cash", label: "Dinheiro (Cash)" },
+    { method: "Fawry", label: "Fawry" },
+    { method: "MobileWallet", label: "Mobile Wallet" },
+  ]},
+  { code: "KWT", name: "Kuwait", currency: "KWD", methods: [
+    { method: "CreditCard", label: "Cartão de Crédito" },
+    { method: "Wallet", channel: "KNet", label: "KNet Wallet" },
+  ]},
+  { code: "OMN", name: "Omã", currency: "OMR", methods: [
+    { method: "CreditCard", label: "Cartão de Crédito" },
+  ]},
+  { code: "QAT", name: "Catar", currency: "QAR", methods: [
+    { method: "CreditCard", label: "Cartão de Crédito" },
+  ]},
+  { code: "SAU", name: "Arábia Saudita", currency: "SAR", methods: [
+    { method: "CreditCard", label: "Cartão de Crédito" },
+    { method: "Wallet", channel: "MADA", label: "MADA Wallet" },
+  ]},
+  { code: "ARE", name: "Emirados Árabes Unidos", currency: "AED", methods: [
+    { method: "CreditCard", label: "Cartão de Crédito" },
+  ]},
+  { code: "POL", name: "Polônia", currency: "PLN", methods: [
+    { method: "PayU", label: "PayU" },
+  ]},
+  { code: "CZE", name: "República Tcheca", currency: "CZK", methods: [
+    { method: "PayU", label: "PayU" },
+  ]},
+  { code: "PRT", name: "Portugal", currency: "EUR", methods: [
+    { method: "Multibanco", label: "Multibanco" },
+    { method: "Trustly", label: "Trustly" },
+    { method: "Paysafecard", label: "Paysafecard" },
+    { method: "DiscoverCard", label: "Discover Card" },
+    { method: "Wallet", channel: "WechatPay", label: "WeChat Pay" },
+  ]},
+  { code: "BEL", name: "Bélgica", currency: "EUR", methods: [
+    { method: "Payconiq", label: "Payconiq" },
+    { method: "Trustly", label: "Trustly" },
+    { method: "Paysafecard", label: "Paysafecard" },
+  ]},
+  { code: "USA", name: "Estados Unidos", currency: "USD", methods: [
+    { method: "Paysafecard", label: "Paysafecard" },
+    { method: "Wallet", channel: "Paypal", label: "PayPal" },
+    { method: "Wallet", channel: "WechatPay", label: "WeChat Pay" },
+    { method: "DiscoverCard", label: "Discover Card" },
+  ]},
+  { code: "CAN", name: "Canadá", currency: "CAD", methods: [
+    { method: "Paysafecard", label: "Paysafecard" },
+    { method: "Wallet", channel: "Paypal", label: "PayPal" },
+    { method: "Wallet", channel: "WechatPay", label: "WeChat Pay" },
+    { method: "DiscoverCard", label: "Discover Card" },
+  ]},
+  { code: "", name: "Global (sem país específico)", currency: "USD", methods: [
+    { method: "ApplePay", label: "Apple Pay" },
+    { method: "GooglePay", label: "Google Pay" },
+  ]},
+];

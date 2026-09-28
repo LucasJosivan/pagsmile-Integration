@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagsmile · Integration Tester</title>
+  <link rel="icon" type="image/svg+xml" href="assets/logo-pagsmile.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-header__brand">
+      <div class="app-header__logo">
+        <img src="assets/logo-pagsmile.svg" alt="Pagsmile" />
+      </div>
+      <span id="header-subtitle" class="app-header__subtitle">Integration Tester</span>
+    </div>
+    <div class="app-header__actions">
+      <div class="lang-switch" id="lang-switch">
+        <button type="button" class="lang-switch__btn" id="lang-pt-btn" data-lang="pt">PT</button>
+        <button type="button" class="lang-switch__btn" id="lang-en-btn" data-lang="en">EN</button>
+      </div>
+      <button id="creds-btn" class="btn btn-outline btn-sm" type="button">Credentials</button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <button id="back-btn" class="btn btn-ghost btn-sm back-btn" type="button">← Back</button>
+    <nav id="steps" class="stepper"></nav>
+    <section id="step-content" class="step-content"></section>
+  </main>
+
+  <footer id="app-footer-text" class="app-footer"></footer>
+
+  <dialog id="creds-dialog" class="creds-dialog">
+    <div class="creds-dialog__inner">
+      <div class="creds-dialog__header">
+        <h3 id="creds-title">Credentials</h3>
+        <button class="btn btn-ghost btn-sm" type="button" id="creds-close-btn">Close</button>
+      </div>
+      <div id="creds-body"></div>
+    </div>
+  </dialog>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

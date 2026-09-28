@@ -1,0 +1,54 @@
+:root {
+  --ps-bg: #fafbfc;
+  --ps-paper: #ffffff;
+  --ps-text: #002443;
+  --ps-text-muted: #5d7a96;
+  --ps-text-faint: #94abc1;
+  --ps-border: rgba(0, 36, 67, 0.08);
+  --ps-accent: #2bc196;
+  --ps-accent-soft: rgba(43, 193, 150, 0.1);
+  --ps-navy: #002443;
+  --ps-success: #16a34a;
+  --ps-warning: #f59e0b;
+  --ps-danger: #dc2626;
+  --ps-info: #0ea5e9;
+
+  --ps-r-xs: 4px;
+  --ps-r-sm: 8px;
+  --ps-r-md: 12px;
+  --ps-r-lg: 16px;
+  --ps-r-xl: 24px;
+  --ps-r-full: 999px;
+
+  --ps-1: 4px;
+  --ps-2: 8px;
+  --ps-3: 12px;
+  --ps-4: 16px;
+  --ps-6: 24px;
+  --ps-8: 32px;
+  --ps-12: 48px;
+
+  --ps-dur-fast: 150ms;
+  --ps-dur-base: 250ms;
+  --ps-dur-slow: 450ms;
+
+  --ps-shadow-sm: 0 1px 2px rgba(0, 36, 67, 0.06), 0 1px 1px rgba(0, 36, 67, 0.04);
+  --ps-shadow-md: 0 4px 12px rgba(0, 36, 67, 0.08);
+  --ps-shadow-glow: 0 0 0 3px rgba(43, 193, 150, 0.25);
+
+  --ps-font-body: "Manrope", system-ui, sans-serif;
+  --ps-font-mono: "IBM Plex Mono", monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ps-bg: #001124;
+    --ps-paper: #001b32;
+    --ps-text: #e9eef4;
+    --ps-text-muted: #94abc1;
+    --ps-text-faint: #5d7a96;
+    --ps-border: rgba(255, 255, 255, 0.08);
+    --ps-accent: #3ed29e;
+    --ps-accent-soft: rgba(43, 193, 150, 0.18);
+  }
+}
