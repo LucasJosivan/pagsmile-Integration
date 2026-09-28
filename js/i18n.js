@@ -17,6 +17,37 @@ const STRINGS = {
     step_details: "Detalhes",
     step_result: "Resultado",
 
+    step_change: "Trocar",
+    reset_button: "Recomeçar",
+    curl_panel_title: "cURL da requisição",
+    curl_panel_subtitle: "Atualiza em tempo real conforme você preenche o formulário.",
+    request_info_endpoint: "Endpoint",
+    copy_button: "Copiar",
+    copied_button: "Copiado!",
+    code_panel_title: "Código pronto para copiar e colar",
+    preview_placeholder: "Escolha Payin ou Payout para começar a montar a requisição.",
+    preview_missing_creds_note: "Sem credenciais salvas — a prévia usa valores de exemplo no lugar de app_id/security_key.",
+    hints_panel_title: "Dicas de formato dos parâmetros",
+    hints_general_title: "Gerais",
+    hints_country_title: "Dados de teste (Sandbox) para {country}",
+    hints_codes_title: "Códigos de resposta da API",
+    hints_statuses_title: "Status possíveis",
+    hints_rejection_title: "Motivos de rejeição de Payout",
+    hints_toggle_show: "Mostrar",
+    hints_toggle_hide: "Ocultar",
+    required_legend: "* Campo obrigatório",
+    hints_label_document: "Documento",
+    hints_label_test_cards: "Cartões de teste:",
+    hints_label_test_accounts: "Contas de teste (Sandbox) por status:",
+    hints_label_card_note: "Nome do titular para todos os cartões de teste: \"APRO\".",
+
+    hint_timestamp: "timestamp usa o formato yyyy-MM-dd HH:mm:ss (fuso do servidor Pagsmile).",
+    hint_currency: "moedas seguem o padrão ISO 4217 (3 letras maiúsculas), ex.: BRL, USD, MXN.",
+    hint_notify_url: "notify_url precisa ser um endpoint HTTPS público, acessível pela internet (não use localhost).",
+    hint_unique_id: "out_trade_no/custom_code deve ser único por requisição — reenviar o mesmo valor gera erro de duplicidade.",
+    hint_phone: "telefone no formato E.164, com código do país e sem símbolos: +5511999999999.",
+    hint_amount_format: "valores monetários são strings com ponto decimal e 2 casas, ex.: \"10.00\".",
+
     env_title: "Qual ambiente você quer testar?",
     env_sandbox_title: "Sandbox",
     env_live_title: "Live",
@@ -177,6 +208,37 @@ const STRINGS = {
     step_details: "Details",
     step_result: "Result",
 
+    step_change: "Change",
+    reset_button: "Start over",
+    curl_panel_title: "Request cURL",
+    curl_panel_subtitle: "Updates live as you fill in the form.",
+    request_info_endpoint: "Endpoint",
+    copy_button: "Copy",
+    copied_button: "Copied!",
+    code_panel_title: "Ready-to-paste code",
+    preview_placeholder: "Choose Payin or Payout to start building the request.",
+    preview_missing_creds_note: "No saved credentials — the preview uses sample values instead of app_id/security_key.",
+    hints_panel_title: "Parameter format tips",
+    hints_general_title: "General",
+    hints_country_title: "Sandbox test data for {country}",
+    hints_codes_title: "API response codes",
+    hints_statuses_title: "Possible statuses",
+    hints_rejection_title: "Payout rejection reasons",
+    hints_toggle_show: "Show",
+    hints_toggle_hide: "Hide",
+    required_legend: "* Required field",
+    hints_label_document: "Document",
+    hints_label_test_cards: "Test cards:",
+    hints_label_test_accounts: "Sandbox test accounts by status:",
+    hints_label_card_note: "Cardholder name for all test cards: \"APRO\".",
+
+    hint_timestamp: "timestamp uses the yyyy-MM-dd HH:mm:ss format (Pagsmile server timezone).",
+    hint_currency: "currencies follow ISO 4217 (3 uppercase letters), e.g. BRL, USD, MXN.",
+    hint_notify_url: "notify_url must be a public HTTPS endpoint reachable from the internet (don't use localhost).",
+    hint_unique_id: "out_trade_no/custom_code must be unique per request — resubmitting the same value causes a duplicate error.",
+    hint_phone: "phone in E.164 format, with country code and no symbols: +5511999999999.",
+    hint_amount_format: "monetary amounts are strings with a decimal point and 2 places, e.g. \"10.00\".",
+
     env_title: "Which environment do you want to test?",
     env_sandbox_title: "Sandbox",
     env_live_title: "Live",
@@ -321,6 +383,197 @@ const STRINGS = {
     suggestion_generic:
       "Check the full error message below (msg/sub_msg) and compare it with the required fields in Pagsmile's docs for this method.",
   },
+  zh: {
+    header_subtitle: "集成测试工具",
+    credentials_button: "凭证",
+    back_button: "← 返回",
+    footer_text: "内部测试工具 · 如非必要请勿使用真实生产环境凭证。",
+    credentials_title: "凭证",
+    close_button: "关闭",
+
+    step_env: "环境",
+    step_flow: "代收 / 代付",
+    step_country: "国家",
+    step_integration: "接入方式",
+    step_method: "支付方式",
+    step_details: "详情",
+    step_result: "结果",
+
+    step_change: "更改",
+    reset_button: "重新开始",
+    curl_panel_title: "请求的 cURL",
+    curl_panel_subtitle: "随着表单填写实时更新。",
+    request_info_endpoint: "接口地址（Endpoint）",
+    copy_button: "复制",
+    copied_button: "已复制！",
+    code_panel_title: "可直接复制粘贴的代码",
+    preview_placeholder: "选择代收（Payin）或代付（Payout）以开始构建请求。",
+    preview_missing_creds_note: "未保存凭证 — 预览使用示例值代替 app_id/security_key。",
+    hints_panel_title: "参数格式提示",
+    hints_general_title: "通用",
+    hints_country_title: "{country} 的沙箱测试数据",
+    hints_codes_title: "API 响应码",
+    hints_statuses_title: "可能的状态",
+    hints_rejection_title: "代付拒绝原因",
+    hints_toggle_show: "显示",
+    hints_toggle_hide: "隐藏",
+    required_legend: "* 必填字段",
+    hints_label_document: "证件",
+    hints_label_test_cards: "测试卡：",
+    hints_label_test_accounts: "按状态划分的沙箱测试账户：",
+    hints_label_card_note: "所有测试卡的持卡人姓名均为：\"APRO\"。",
+
+    hint_timestamp: "timestamp 使用 yyyy-MM-dd HH:mm:ss 格式（Pagsmile 服务器时区）。",
+    hint_currency: "货币遵循 ISO 4217 标准（3 位大写字母），例如：BRL、USD、MXN。",
+    hint_notify_url: "notify_url 必须是可从互联网访问的公开 HTTPS 端点（不要使用 localhost）。",
+    hint_unique_id: "out_trade_no/custom_code 每次请求必须唯一 — 重复提交相同的值会导致重复错误。",
+    hint_phone: "电话号码使用 E.164 格式，包含国家代码且不含符号：+5511999999999。",
+    hint_amount_format: "金额为带小数点、保留 2 位小数的字符串，例如：\"10.00\"。",
+
+    env_title: "您想测试哪个环境？",
+    env_sandbox_title: "沙箱（Sandbox）",
+    env_live_title: "正式环境（Live）",
+
+    flow_title: "代收（Payin）还是代付（Payout）？",
+    flow_payin_title: "代收（Payin）",
+    flow_payin_subtitle: "接收客户的付款",
+    flow_payout_title: "代付（Payout）",
+    flow_payout_subtitle: "向收款人付款",
+    flow_warning_no_creds: "尚未为 {env} 环境配置代收凭证。请先在“凭证”中添加至少一个国家的配置以继续。",
+
+    country_title: "您想测试哪个国家？",
+    country_empty_warning: "{env} 环境下没有已配置凭证的代收国家。请先添加凭证以继续。",
+    open_credentials_button: "打开凭证设置",
+    global_country_label: "全球（无特定国家）",
+
+    integration_title: "Checkout Page 还是直接接入？",
+    integration_checkout_title: "Checkout Page",
+    integration_checkout_subtitle: "由 Pagsmile 托管支付页面",
+    integration_direct_title: "直接接入",
+    integration_direct_subtitle: "您通过 API 直接发送支付数据",
+
+    method_title: "选择哪种支付方式？",
+    method_all_title: "所有支付方式",
+    method_all_subtitle: "不发送 method 参数 — Pagsmile 会在 Checkout Page 中显示该账户已启用的所有支付方式。",
+    channel_prefix: "渠道",
+
+    creds_missing_payin: "缺少该国家/环境的代收凭证。请打开“凭证”进行配置。",
+    creds_missing_payout: "缺少该环境的代付凭证。请打开“凭证”进行配置。",
+
+    details_title: "核对数据并提交",
+    submit_button: "发起交易",
+    submit_button_sending: "发送中…",
+
+    result_title: "交易结果",
+    result_none: "暂无结果。",
+    result_retry_method: "测试其他支付方式",
+    result_restart: "重新开始",
+
+    creds_payin_heading: "代收 · 按国家配置的凭证",
+    creds_payin_hint: "每个代收国家都有各自的 App ID 和 Security Key。您可以同时填写 Sandbox 和 Live。",
+    creds_country_label: "国家",
+    creds_sandbox_appid: "Sandbox · App ID",
+    creds_sandbox_key: "Sandbox · Security Key",
+    creds_live_appid: "Live · App ID",
+    creds_live_key: "Live · Security Key",
+    creds_save_country: "保存该国家",
+    creds_configured_countries: "已配置的国家",
+    creds_no_country_yet: "尚未配置任何国家。",
+    creds_edit: "编辑",
+    creds_remove: "移除",
+    creds_payout_heading: "代付 · 全局凭证",
+    creds_payout_hint: "代付使用一组统一的凭证（不按国家区分）。",
+    creds_sandbox_appkey: "Sandbox · App Key",
+    creds_live_appkey: "Live · App Key",
+    creds_save_payout: "保存代付凭证",
+    badge_sandbox_on: "Sandbox ✓",
+    badge_sandbox_off: "Sandbox –",
+    badge_live_on: "Live ✓",
+    badge_live_off: "Live –",
+
+    field_out_trade_no: "订单号（out_trade_no）",
+    field_order_amount: "金额（order_amount）",
+    field_order_currency: "币种（order_currency）",
+    field_subject: "标题（subject）",
+    field_content: "描述（content）",
+    field_buyer_id: "买家 ID（buyer_id）",
+    field_notify_url: "通知地址（Notify URL）",
+    field_return_url: "返回地址（Return URL）",
+    field_timeout_express: "过期时间（timeout_express）",
+    field_regions: "地区（Regions，ISO3，逗号分隔）",
+    field_region: "地区（Region，ISO3）",
+    field_customer_name: "客户姓名",
+    field_customer_email: "客户邮箱",
+    field_customer_phone: "客户电话",
+    field_customer_doc_number: "客户证件号码",
+    field_customer_doc_type: "证件类型",
+    field_address_zip: "邮政编码",
+    field_address_state: "州/省",
+    field_address_city: "城市",
+    field_address_street: "街道",
+    field_address_street_number: "门牌号",
+    field_token: "卡片 Token（沙箱）",
+    field_fingerprint: "指纹（Fingerprint）",
+    field_issuer: "卡组织（issuer）",
+    field_installments: "分期数",
+    field_user_ip: "客户 IP",
+    field_bank: "银行代码",
+    field_language_code: "语言代码",
+    default_subject: "{label} 测试",
+    default_content: "通过 {label} 的测试订单",
+
+    field_custom_code: "提现单号（custom_code）",
+    field_beneficiary_name: "收款人姓名",
+    field_phone: "电话",
+    field_email: "邮箱",
+    field_account: "银行账户/收款标识",
+    field_account_type: "账户类型（account_type）",
+    field_document_id: "证件号码（document_id）",
+    field_document_type: "证件类型（document_type）",
+    field_fee_bear: "手续费承担方（fee_bear）",
+    field_fee_bear_merchant: "商户",
+    field_fee_bear_beneficiary: "收款人",
+    field_amount: "金额（amount）",
+    field_source_currency: "源币种",
+    field_arrival_currency: "到账币种",
+    field_additional_remark: "备注",
+    default_additional_remark: "代付测试",
+
+    result_success_badge: "✓ 成功",
+    result_error_badge: "× 失败",
+    result_label_message: "消息",
+    result_label_error_detail: "错误详情",
+    result_open_payment_link: "打开支付链接 →",
+    result_copy_qr_label: "复制码 / 二维码",
+    result_error_title: "错误",
+    result_suggestion_title: "建议",
+
+    network_cors_error:
+      "直接从浏览器调用 Pagsmile API 时发生网络/CORS 错误。支付类 API 通常要求服务器对服务器调用；如果网关没有为该域名开放 Access-Control-Allow-Origin，请使用本地代理（见 README），或仅在测试时临时关闭 CORS 限制。",
+
+    suggestion_auth:
+      "很可能是认证问题：请检查“凭证”中保存的 App ID 与 Security/App Key 是否与所选的国家和环境（Sandbox/Live）完全一致，且没有多余空格。",
+    suggestion_duplicate:
+      "该标识符（out_trade_no/custom_code）已被使用过。请返回并生成一个新的唯一值后再重新提交。",
+    suggestion_amount:
+      "发送的金额可能超出了该支付方式/国家允许的范围。请查看支付方式步骤中显示的最小/最大限额，并调整金额字段。",
+    suggestion_currency:
+      "发送的币种可能不受该支付方式/国家支持。请检查表单中建议的默认币种并按需调整。",
+    suggestion_method:
+      "该支付方式/渠道可能未在此环境下为您的账户启用。请在 Pagsmile 后台确认该方式是否已为您的 App ID 激活。",
+    suggestion_missing:
+      "似乎缺少某个必填字段。请检查表单 — 字段名称通常会出现在下方响应的 sub_code/sub_msg 中。",
+    suggestion_invalid:
+      "提交的某个字段未通过校验。请查看下方 sub_code/sub_msg 中指出的字段，并对照 Pagsmile 文档确认所需格式。",
+    suggestion_5xx:
+      "Pagsmile 一侧发生错误（HTTP 5xx）。这不是表单需要修正的问题 — 请稍等片刻后重试；如持续出现请联系 Pagsmile 支持。",
+    suggestion_404:
+      "未找到该端点（HTTP 404）。请检查所选环境（Sandbox/Live）是否与所用凭证匹配，以及基础 URL 是否正确。",
+    suggestion_400_generic:
+      "请求被拒绝（HTTP 400）。请重新阅读下方的错误信息（msg/sub_msg），并检查该支付方式所需的必填字段。",
+    suggestion_generic:
+      "请查看下方完整的错误信息（msg/sub_msg），并对照 Pagsmile 文档中该支付方式所需的字段进行核对。",
+  },
 };
 
 const COUNTRY_NAMES_EN = {
@@ -337,6 +590,20 @@ const COUNTRY_NAMES_EN = {
   PRY: "Paraguay", YEM: "Yemen",
 };
 
+const COUNTRY_NAMES_ZH = {
+  BRA: "巴西", MEX: "墨西哥", ARG: "阿根廷", COL: "哥伦比亚", CHL: "智利",
+  PER: "秘鲁", ECU: "厄瓜多尔", GTM: "危地马拉", PAN: "巴拿马", CRI: "哥斯达黎加",
+  URY: "乌拉圭", BOL: "玻利维亚", GHA: "加纳", KEN: "肯尼亚", NGA: "尼日利亚",
+  UGA: "乌干达", CHN: "中国", HKG: "中国香港", JPN: "日本", IDN: "印度尼西亚",
+  KOR: "韩国", SGP: "新加坡", BGD: "孟加拉国", MYS: "马来西亚",
+  PHL: "菲律宾", THA: "泰国", TWN: "中国台湾", VNM: "越南", PAK: "巴基斯坦",
+  TJK: "塔吉克斯坦", AUS: "澳大利亚", TUR: "土耳其", BHR: "巴林", EGY: "埃及",
+  KWT: "科威特", OMN: "阿曼", QAT: "卡塔尔", SAU: "沙特阿拉伯", ARE: "阿拉伯联合酋长国",
+  POL: "波兰", CZE: "捷克", PRT: "葡萄牙", BEL: "比利时", USA: "美国",
+  CAN: "加拿大", IND: "印度", JOR: "约旦", KAZ: "哈萨克斯坦", NPL: "尼泊尔",
+  PRY: "巴拉圭", YEM: "也门",
+};
+
 const LABEL_TRANSLATIONS = {
   "Cartão de Crédito": "Credit Card",
   "Cartão de Débito": "Debit Card",
@@ -348,6 +615,19 @@ const LABEL_TRANSLATIONS = {
   "SPEI (Transferência bancária)": "SPEI (Bank Transfer)",
   "PSE (Transferência bancária)": "PSE (Bank Transfer)",
   "Khipu (Transferência bancária)": "Khipu (Bank Transfer)",
+};
+
+const LABEL_TRANSLATIONS_ZH = {
+  "Cartão de Crédito": "信用卡",
+  "Cartão de Débito": "借记卡",
+  "Dinheiro (Cash)": "现金",
+  "Transferência bancária": "银行转账",
+  "PIX Biometria": "PIX 生物识别",
+  "Lottery (Casas Lotéricas)": "彩票投注站（Lottery）",
+  "BNCR (Transferência + Cash)": "BNCR（转账 + 现金）",
+  "SPEI (Transferência bancária)": "SPEI（银行转账）",
+  "PSE (Transferência bancária)": "PSE（银行转账）",
+  "Khipu (Transferência bancária)": "Khipu（银行转账）",
 };
 
 const META_PHRASES = [
@@ -366,14 +646,32 @@ const META_PHRASES = [
   ["(inteiros)", "(integers)"],
 ];
 
-let currentLang = localStorage.getItem(LANG_KEY) === "en" ? "en" : "pt";
+const META_PHRASES_ZH = [
+  ["Saque pós-pagamento", "货到后提现"],
+  ["janela de 30 dias", "30 天窗口期"],
+  ["prazo de 7 dias", "7 天期限"],
+  ["Não especificado", "未指定"],
+  ["Pessoa física", "个人"],
+  ["Empresa", "企业"],
+  ["Variável", "可变"],
+  ["Instantâneo", "即时"],
+  ["dias úteis", "个工作日"],
+  ["dia útil", "个工作日"],
+  ["minutos", "分钟"],
+  ["minuto", "分钟"],
+  ["(inteiros)", "（整数）"],
+];
+
+const SUPPORTED_LANGS = ["pt", "en", "zh"];
+
+let currentLang = SUPPORTED_LANGS.includes(localStorage.getItem(LANG_KEY)) ? localStorage.getItem(LANG_KEY) : "pt";
 
 export function getLang() {
   return currentLang;
 }
 
 export function setLang(lang) {
-  currentLang = lang === "en" ? "en" : "pt";
+  currentLang = SUPPORTED_LANGS.includes(lang) ? lang : "pt";
   localStorage.setItem(LANG_KEY, currentLang);
 }
 
@@ -390,6 +688,7 @@ export function t(key, vars) {
 export function translateCountryName(country) {
   if (!country || !country.code) return t("global_country_label");
   if (currentLang === "pt") return country.name;
+  if (currentLang === "zh") return COUNTRY_NAMES_ZH[country.code] || country.name;
   return COUNTRY_NAMES_EN[country.code] || country.name;
 }
 
@@ -398,10 +697,12 @@ export function translateMethodLabel(methodInfo) {
   if (methodInfo.isAllMethods) return t("method_all_title");
   const label = methodInfo.label;
   if (currentLang === "pt" || !label) return label;
+  if (currentLang === "zh") return LABEL_TRANSLATIONS_ZH[label] || label;
   return LABEL_TRANSLATIONS[label] || label;
 }
 
 export function translateMeta(text) {
-  if (currentLang !== "en" || !text) return text;
-  return META_PHRASES.reduce((acc, [from, to]) => acc.split(from).join(to), text);
+  if (currentLang === "pt" || !text) return text;
+  const phrases = currentLang === "zh" ? META_PHRASES_ZH : META_PHRASES;
+  return phrases.reduce((acc, [from, to]) => acc.split(from).join(to), text);
 }

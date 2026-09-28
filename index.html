@@ -22,15 +22,47 @@
       <div class="lang-switch" id="lang-switch">
         <button type="button" class="lang-switch__btn" id="lang-pt-btn" data-lang="pt">PT</button>
         <button type="button" class="lang-switch__btn" id="lang-en-btn" data-lang="en">EN</button>
+        <button type="button" class="lang-switch__btn" id="lang-zh-btn" data-lang="zh">中文</button>
       </div>
+      <button id="reset-btn" class="btn btn-ghost btn-sm" type="button">Reset</button>
       <button id="creds-btn" class="btn btn-outline btn-sm" type="button">Credentials</button>
     </div>
   </header>
 
-  <main class="app-main">
-    <button id="back-btn" class="btn btn-ghost btn-sm back-btn" type="button">← Back</button>
-    <nav id="steps" class="stepper"></nav>
-    <section id="step-content" class="step-content"></section>
+  <main class="workbench">
+    <section class="workbench__form">
+      <div id="form-column"></div>
+      <div class="preview-card hints-card" id="hints-panel"></div>
+    </section>
+
+    <aside class="workbench__preview">
+      <div class="preview-card">
+        <div class="preview-card__header">
+          <div>
+            <h3 id="curl-title">cURL</h3>
+            <p id="curl-subtitle" class="preview-card__subtitle"></p>
+          </div>
+          <button id="copy-curl-btn" class="btn btn-outline btn-sm" type="button">Copy</button>
+        </div>
+        <div class="request-info" id="request-info"></div>
+        <pre id="curl-output" class="code-block code-block--preview"></pre>
+      </div>
+
+      <div class="preview-card">
+        <div class="preview-card__header">
+          <div>
+            <h3 id="code-title">Ready-to-paste code</h3>
+          </div>
+          <button id="copy-code-btn" class="btn btn-outline btn-sm" type="button">Copy</button>
+        </div>
+        <div class="code-tabs" id="code-tabs">
+          <button type="button" class="code-tab code-tab--active" data-lang="go">Go</button>
+          <button type="button" class="code-tab" data-lang="node">Node.js</button>
+          <button type="button" class="code-tab" data-lang="python">Python</button>
+        </div>
+        <pre id="code-output" class="code-block code-block--preview"></pre>
+      </div>
+    </aside>
   </main>
 
   <footer id="app-footer-text" class="app-footer"></footer>

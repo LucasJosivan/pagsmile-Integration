@@ -55,7 +55,10 @@ export function field({ key, label, type = "text", placeholder = "", value = "",
     });
   }
   return el("div", { class: "form-field" }, [
-    el("label", { for: inputId, class: "form-field__label" }, label),
+    el("label", { for: inputId, class: "form-field__label" }, [
+      label,
+      required ? el("span", { class: "form-field__required", "aria-hidden": "true" }, " *") : null,
+    ]),
     input,
   ]);
 }

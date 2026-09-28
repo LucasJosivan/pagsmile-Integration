@@ -1,4 +1,3 @@
-import { toBasicAuth, buildPayoutSignature } from "./crypto.js";
 import { t } from "../i18n.js";
 
 export const PAYIN_BASE_URL = {
@@ -19,7 +18,7 @@ class ApiError extends Error {
   }
 }
 
-async function postJson(url, headers, body) {
+export async function sendRequest({ url, headers, body }) {
   let response;
   try {
     response = await fetch(url, {
@@ -40,23 +39,4 @@ async function postJson(url, headers, body) {
   }
 
   return { httpStatus: response.status, ok: response.ok, body: json };
-}
-
-export async function createCheckoutPage(env, payinCreds, payload) {
-  const url = `${PAYIN_BASE_URL[env]}/trade/create`;
-  const headers = { Authorization: toBasicAuth(payinCreds.appId, payinCreds.securityKey) };
-  return postJson(url, headers, payload);
-}
-
-export async function submitDirectPayin(env, payinCreds, payload) {
-  const url = `${PAYIN_BASE_URL[env]}/trade/pay`;
-  const headers = { Authorization: toBasicAuth(payinCreds.appId, payinCreds.securityKey) };
-  return postJson(url, headers, payload);
-}
-
-export async function submitPayout(env, payoutCreds, payload) {
-  const url = `${PAYOUT_BASE_URL[env]}/api/payout`;
-  const signature = await buildPayoutSignature(payload, payoutCreds.appKey);
-  const headers = { AppId: payoutCreds.appId, Authorization: signature };
-  return postJson(url, headers, payload);
 }
