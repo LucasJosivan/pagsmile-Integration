@@ -75,5 +75,6 @@ export function createWizardState() {
     country: null,
     integrationType: null,
     method: null,
+    resultScenario: "paid",
   };
 }

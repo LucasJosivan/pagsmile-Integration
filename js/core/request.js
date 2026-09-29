@@ -23,14 +23,20 @@ function defaultValuesFrom(fieldsDef) {
   return Object.fromEntries(fieldsDef.map((f) => [f.key, f.value]));
 }
 
+function requiredLeafKeysFrom(fieldsDef, extraKeys = []) {
+  return [...fieldsDef.filter((f) => f.required).map((f) => f.key.split(".").pop()), ...extraKeys];
+}
+
 /**
- * Builds the {url, headers, body} for the current wizard selection. Any part
- * of the wizard that hasn't been chosen yet (country, method, integration
- * type, credentials) is filled with an <ANGLE_BRACKET> placeholder so a live
- * preview (cURL / code snippets) can be shown progressively, starting right
- * after the Payin/Payout choice.
+ * Builds the {url, headers, body, requiredKeys} for the current wizard
+ * selection. Any part of the wizard that hasn't been chosen yet (country,
+ * method, integration type, credentials) is filled with an <ANGLE_BRACKET>
+ * placeholder so a live preview (cURL / code snippets) can be shown
+ * progressively, starting right after the Payin/Payout choice. `requiredKeys`
+ * lists the JSON leaf key names that are mandatory, used to highlight unfilled
+ * required lines in the preview.
  */
-export async function buildRequestSpec({ flow, integrationType, env, country, methodInfo, values, payinCreds, payoutCreds }) {
+export async function buildRequestSpec({ flow, integrationType, env, country, methodInfo, values, payinCreds, payoutCreds, resultScenario }) {
   const effEnv = env || "sandbox";
   const effCountry = country || PLACEHOLDER_COUNTRY;
   const effMethod = methodInfo || PLACEHOLDER_METHOD;
@@ -52,7 +58,7 @@ export async function buildRequestSpec({ flow, integrationType, env, country, me
       };
       if (effMethod.channel) body.channel = effMethod.channel;
       const url = `${PAYIN_BASE_URL[effEnv]}/trade/<create-ou-pay>`;
-      return { url, headers, body };
+      return { url, headers, body, requiredKeys: requiredLeafKeysFrom(commonDef, ["app_id", "method"]) };
     }
 
     const isCheckout = integrationType === "checkout";
@@ -60,15 +66,20 @@ export async function buildRequestSpec({ flow, integrationType, env, country, me
     const fieldsDef = isCheckout ? checkoutFields(ctx) : directPayinFields(ctx);
     const mergedValues = { ...defaultValuesFrom(fieldsDef), ...(values || {}) };
     const body = isCheckout ? buildCheckoutPayload(mergedValues, ctx) : buildDirectPayinPayload(mergedValues, ctx);
-    return { url, headers, body };
+    return { url, headers, body, requiredKeys: requiredLeafKeysFrom(fieldsDef, ["app_id", "method"]) };
   }
 
   const creds = payoutCreds || PLACEHOLDER_PAYOUT_CREDS;
-  const ctx = { country: effCountry, methodInfo: effMethod };
+  const ctx = { country: effCountry, methodInfo: effMethod, resultScenario: resultScenario || "paid" };
   const fieldsDef = payoutFields(ctx);
   const mergedValues = { ...defaultValuesFrom(fieldsDef), ...(values || {}) };
   const url = `${PAYOUT_BASE_URL[effEnv]}/api/payout`;
   const body = buildPayoutPayload(mergedValues, ctx);
   const signature = await buildPayoutSignature(body, creds.appKey);
-  return { url, headers: { AppId: creds.appId, Authorization: signature }, body };
+  return {
+    url,
+    headers: { AppId: creds.appId, Authorization: signature },
+    body,
+    requiredKeys: requiredLeafKeysFrom(fieldsDef, ["method", "country"]),
+  };
 }

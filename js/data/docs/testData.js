@@ -15,54 +15,82 @@ export const PAYIN_TEST_DATA = {
   PHL: { phone: "639511331388" },
 };
 
-export const CARD_TEST_NOTE = "Nome do titular para todos os cartões de teste: \"APRO\".";
-
-// Sandbox behaviors that force a specific final status, by country/method.
-export const PAYOUT_TEST_DATA = {
-  ARG: [
-    { method: "Transferência bancária", status: "PAID", value: "0110599520000012345678", note: "processa em ~10 minutos" },
-    { method: "Transferência bancária", status: "REJECTED", value: "0270218820054311290067" },
-    { method: "Wallet (MercadoPago)", status: "PAID", value: "0000003140090418135201", note: "instantâneo" },
-  ],
-  BRA: [
-    { method: "PIX", status: "PAID", value: "pagsmile_test_paid@pagsmile.com / CPF 11032341882 / CNPJ 44526700000190" },
-    { method: "PIX", status: "REJECTED", value: "pagsmile_test_reject@pagsmile.com / CPF 46815328430 / CNPJ 66001157000140" },
-    { method: "PIX", status: "REFUNDED", note: "vira PAID e após 10s muda para REFUNDED", value: "pagsmile_test_refund@pagsmile.com / CPF 22747936708" },
-    { method: "Transferência bancária", status: "PAID", value: "conta 22222222 + CPF 50284414727", note: "processa em ~10 minutos" },
-    { method: "Transferência bancária", status: "REJECTED", value: "conta 11111111" },
-    { method: "Transferência bancária", status: "REFUNDED", value: "conta 33333333" },
-    { method: "QR Code", status: "PAID", value: "QR contendo \"***SUCCESS\"" },
-    { method: "QR Code", status: "REJECTED", value: "QR contendo \"***REFUSED\"" },
-    { method: "QR Code", status: "REFUNDED", value: "QR contendo \"***REFUND\"" },
-  ],
-  MEX: [
-    { method: "SPEI", status: "PAID", value: "CLABE 002010077777777771", note: "processa em ~10 minutos" },
-    { method: "SPEI", status: "REJECTED", value: "CLABE 014027000005555558" },
-    { method: "SPEI", status: "REFUNDED", value: "CLABE 002010088888888881" },
-  ],
-  CHL: [
-    { method: "Transferência bancária", status: "PAID", value: "conta 222222222222", note: "processa em ~10 minutos" },
-    { method: "Transferência bancária", status: "REJECTED", value: "conta 111111111111" },
-    { method: "Wallet (Mach)", status: "PAID", value: "e-mail paid@pagsmile.com" },
-    { method: "Wallet (Mach)", status: "REJECTED", value: "e-mail rejected@pagsmile.com" },
-  ],
-  COL: [
-    { method: "Transferência bancária", status: "PAID", value: "conta 222222222222", note: "processa em ~10 minutos" },
-    { method: "Transferência bancária", status: "REJECTED", value: "conta 111111111111" },
-    { method: "Wallet (Tpaga)", status: "PAID", value: "+57322222222" },
-    { method: "Wallet (Tpaga)", status: "REJECTED", value: "+57311111111" },
-    { method: "Transfiya", status: "PAID", value: "572222222222" },
-    { method: "Transfiya", status: "REJECTED", value: "571111111111" },
-  ],
-  PER: [
-    { method: "Transferência bancária", status: "PAID", value: "conta 2222222222222", note: "processa em ~1 dia" },
-    { method: "Transferência bancária", status: "REJECTED", value: "conta 1111111111111" },
-  ],
-  ECU: [
-    { method: "Transferência bancária", status: "PAID", value: "conta 2222222222", note: "processa em ~1 dia" },
-    { method: "Transferência bancária", status: "REJECTED", value: "conta 1111111111" },
-  ],
-  URY: [
-    { method: "Transferência bancária", status: "PAID", value: "conta 000001111111", note: "processa em ~1 dia" },
-  ],
+// Structured sandbox scenarios used to auto-fill the payout form when the
+// merchant picks "Success" or "Rejected" as the expected result. Keyed by
+// country code, then by `method` (or `method:channel` when the method has
+// multiple channels), matching the literal values in data/payoutData.js.
+export const PAYOUT_TEST_SCENARIOS = {
+  ARG: {
+    BANKTRANSFER: {
+      paid: { account: "0110599520000012345678" },
+      rejected: { account: "0270218820054311290067" },
+    },
+  },
+  BRA: {
+    PIX: {
+      paid: { account: "pagsmile_test_paid@pagsmile.com", document_id: "11032341882" },
+      rejected: { account: "pagsmile_test_reject@pagsmile.com", document_id: "46815328430" },
+    },
+    QRCODE: {
+      paid: { account: "***SUCCESS" },
+      rejected: { account: "***REFUSED" },
+    },
+  },
+  MEX: {
+    SPEI: {
+      paid: { account: "002010077777777771" },
+      rejected: { account: "014027000005555558" },
+    },
+  },
+  CHL: {
+    BANKTRANSFER: {
+      paid: { account: "222222222222" },
+      rejected: { account: "111111111111" },
+    },
+    "WALLET:Vita": {
+      paid: { account: "paid@pagsmile.com" },
+      rejected: { account: "rejected@pagsmile.com" },
+    },
+  },
+  COL: {
+    BANKTRANSFER: {
+      paid: { account: "222222222222" },
+      rejected: { account: "111111111111" },
+    },
+    Transfiya: {
+      paid: { account: "572222222222" },
+      rejected: { account: "571111111111" },
+    },
+    "WALLET:TPaga": {
+      paid: { account: "+57322222222" },
+      rejected: { account: "+57311111111" },
+    },
+  },
+  PER: {
+    BANKTRANSFER: {
+      paid: { account: "2222222222222" },
+      rejected: { account: "1111111111111" },
+    },
+  },
+  ECU: {
+    BANKTRANSFER: {
+      paid: { account: "2222222222" },
+      rejected: { account: "1111111111" },
+    },
+  },
+  URY: {
+    BANKTRANSFER: {
+      paid: { account: "000001111111" },
+    },
+  },
 };
+
+export function payoutScenarioKey(methodInfo) {
+  if (!methodInfo) return "";
+  return methodInfo.channel ? `${methodInfo.method}:${methodInfo.channel}` : methodInfo.method;
+}
+
+export function findPayoutScenario(countryCode, methodInfo, scenario) {
+  const forMethod = PAYOUT_TEST_SCENARIOS[countryCode]?.[payoutScenarioKey(methodInfo)];
+  return forMethod?.[scenario] || null;
+}

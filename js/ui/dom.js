@@ -32,13 +32,24 @@ export function optionCard({ title, subtitle, onClick, selected }) {
   );
 }
 
-export function field({ key, label, type = "text", placeholder = "", value = "", options = [], required = false }) {
+function fieldHelp(hint) {
+  if (!hint) return null;
+  return el("span", { class: "field-help" }, [
+    el("button", { type: "button", class: "field-help__btn", "aria-label": "?" }, "?"),
+    el("span", { class: "field-help__bubble", role: "tooltip" }, hint),
+  ]);
+}
+
+export function field({
+  key, label, type = "text", placeholder = "", value = "", options = [], required = false, readOnly = false, hint = "",
+  pattern = "", inputMode = "", maxLength = "", min = "", step = "",
+}) {
   const inputId = `f-${key}`;
   let input;
   if (type === "select") {
     input = el(
       "select",
-      { id: inputId, name: key, class: "ps-input" },
+      { id: inputId, name: key, class: "ps-input", ...(required ? { required: "required" } : {}) },
       options.map((opt) =>
         el("option", { value: opt.value, ...(opt.value === value ? { selected: "selected" } : {}) }, opt.label)
       )
@@ -48,16 +59,23 @@ export function field({ key, label, type = "text", placeholder = "", value = "",
       id: inputId,
       name: key,
       type,
-      class: "ps-input",
+      class: `ps-input${readOnly ? " ps-input--readonly" : ""}`,
       placeholder,
       value,
       ...(required ? { required: "required" } : {}),
+      ...(readOnly ? { readonly: "readonly", tabindex: "-1" } : {}),
+      ...(pattern ? { pattern } : {}),
+      ...(inputMode ? { inputMode } : {}),
+      ...(maxLength ? { maxLength } : {}),
+      ...(min ? { min } : {}),
+      ...(step ? { step } : {}),
     });
   }
   return el("div", { class: "form-field" }, [
     el("label", { for: inputId, class: "form-field__label" }, [
       label,
       required ? el("span", { class: "form-field__required", "aria-hidden": "true" }, " *") : null,
+      fieldHelp(hint),
     ]),
     input,
   ]);

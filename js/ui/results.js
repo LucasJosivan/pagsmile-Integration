@@ -6,6 +6,17 @@ function isSuccessResponse(ok, code) {
   return ok && String(code).startsWith("1");
 }
 
+function supportCta() {
+  return el("div", { class: "support-cta" }, [
+    el("span", { class: "support-cta__text" }, t("support_cta_text")),
+    el(
+      "button",
+      { class: "btn btn-outline btn-sm", type: "button", onclick: () => window.__pagsmileOpenSupport?.() },
+      t("support_cta_button")
+    ),
+  ]);
+}
+
 function badgeForStatus(ok, code) {
   const isSuccess = isSuccessResponse(ok, code);
   return el(
@@ -69,8 +80,9 @@ export function renderResult(container, { httpStatus, ok, body }) {
     : null;
 
   const raw = el("pre", { class: "code-block" }, JSON.stringify(body, null, 2));
+  const cta = !isSuccess ? supportCta() : null;
 
-  container.append(...[header, highlights, actionsBox, copyBox, suggestionBox, raw].filter((n) => n != null));
+  container.append(...[header, highlights, actionsBox, copyBox, suggestionBox, raw, cta].filter((n) => n != null));
 }
 
 export function renderError(container, error) {
@@ -79,6 +91,7 @@ export function renderError(container, error) {
     el("div", { class: "alert alert--erro" }, [
       el("strong", {}, t("result_error_title")),
       el("p", {}, error.message),
-    ])
+    ]),
+    supportCta()
   );
 }

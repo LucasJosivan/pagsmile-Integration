@@ -139,6 +139,47 @@ function renderPayoutSection(container, box, commit) {
   ]);
 }
 
+function guideBlock({ summary, image, alt, steps, note }) {
+  return el("details", { class: "creds-guide" }, [
+    el("summary", {}, summary),
+    el("div", { class: "creds-guide__body" }, [
+      el("img", { src: image, alt, loading: "lazy" }),
+      el("ol", { class: "creds-guide__steps" }, steps.map((s) => el("li", {}, s))),
+      note ? el("p", { class: "creds-guide__note" }, note) : null,
+    ]),
+  ]);
+}
+
+function renderCredsGuide(container) {
+  const guideSection = el("section", { class: "creds-section" }, [
+    el("h4", {}, t("creds_guide_title")),
+    guideBlock({
+      summary: t("creds_guide_payin_title"),
+      image: "assets/guides/payin-app-id-security-key.png",
+      alt: t("creds_guide_payin_title"),
+      steps: [
+        t("creds_guide_payin_step1"),
+        t("creds_guide_payin_step2"),
+        t("creds_guide_payin_step3"),
+      ],
+      note: t("creds_guide_payin_note"),
+    }),
+    guideBlock({
+      summary: t("creds_guide_payout_title"),
+      image: "assets/guides/payout-app-key.png",
+      alt: t("creds_guide_payout_title"),
+      steps: [
+        t("creds_guide_payout_step1"),
+        t("creds_guide_payout_step2"),
+        t("creds_guide_payout_step3"),
+        t("creds_guide_payout_step4"),
+      ],
+      note: t("creds_guide_payout_note"),
+    }),
+  ]);
+  container.append(guideSection, el("hr", { class: "creds-divider" }));
+}
+
 export function renderCredentialsHub(container, creds, onChange) {
   clear(container);
   const box = { value: creds };
@@ -146,9 +187,10 @@ export function renderCredentialsHub(container, creds, onChange) {
     box.value = next;
     onChange(next);
   };
+  renderCredsGuide(container);
   const payinSection = el("section", { class: "creds-section" });
   const payoutSection = el("section", { class: "creds-section" });
   renderPayinSection(payinSection, box, commit);
   renderPayoutSection(payoutSection, box, commit);
-  container.append(payinSection, el("hr", { class: "creds-divider" }), payoutSection);
+  container.append(el("div", { class: "creds-apps-grid" }, [payinSection, payoutSection]));
 }

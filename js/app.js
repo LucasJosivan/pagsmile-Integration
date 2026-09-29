@@ -14,13 +14,14 @@ import {
 } from "./core/state.js";
 import { el, clear, optionCard, field, readFormValues } from "./ui/dom.js";
 import { renderCredentialsHub } from "./ui/credentials.js";
-import { renderHints } from "./ui/hints.js";
+import { renderReferences } from "./ui/references.js";
+import { renderHighlightedCode } from "./ui/highlight.js";
 import { checkoutFields, directPayinFields, payoutFields } from "./ui/forms.js";
+import { findPayoutScenario } from "./data/docs/testData.js";
 import { renderResult, renderError } from "./ui/results.js";
 import { t, getLang, setLang, translateCountryName, translateMethodLabel, translateMeta } from "./i18n.js";
 
 const ALL_METHODS_OPTION = { isAllMethods: true };
-const CODE_LANGS = ["go", "node", "python"];
 const CODE_BUILDERS = { go: buildGoSnippet, node: buildNodeSnippet, python: buildPythonSnippet };
 
 const wizard = createWizardState();
@@ -39,7 +40,7 @@ const formColumnEl = document.getElementById("form-column");
 const curlOutputEl = document.getElementById("curl-output");
 const codeOutputEl = document.getElementById("code-output");
 const codeTabsEl = document.getElementById("code-tabs");
-const hintsPanelEl = document.getElementById("hints-panel");
+const referencesPanelEl = document.getElementById("references-panel");
 const requestInfoEl = document.getElementById("request-info");
 const copyCurlBtn = document.getElementById("copy-curl-btn");
 const copyCodeBtn = document.getElementById("copy-code-btn");
@@ -51,6 +52,7 @@ const credsCloseBtn = document.getElementById("creds-close-btn");
 const langPtBtn = document.getElementById("lang-pt-btn");
 const langEnBtn = document.getElementById("lang-en-btn");
 const langZhBtn = document.getElementById("lang-zh-btn");
+const supportFloatBtn = document.getElementById("support-float-btn");
 
 function currentCountries() {
   return wizard.flow === "payin" ? PAYIN_COUNTRIES : PAYOUT_COUNTRIES;
@@ -176,6 +178,7 @@ function flowBody() {
           wizard.country = null;
           wizard.integrationType = "direct";
           wizard.method = null;
+          wizard.resultScenario = "paid";
         }),
       }),
     ])
@@ -281,9 +284,20 @@ function methodBody() {
 
 // ---------- Details step (live form + submit + result) ----------
 
+function applyPayoutScenario(formEl, scenarioValue) {
+  wizard.resultScenario = scenarioValue;
+  const scenario = findPayoutScenario(wizard.country?.code, wizard.method, scenarioValue);
+  if (!scenario) return;
+  for (const [key, value] of Object.entries(scenario)) {
+    const input = formEl.querySelector(`[name="${key}"]`);
+    if (input) input.value = value;
+  }
+}
+
 function detailsBody() {
   const resolved = resolveCreds();
-  const ctx = { country: wizard.country, methodInfo: wizard.method, ...resolved };
+  const isPayout = wizard.flow === "payout";
+  const ctx = { country: wizard.country, methodInfo: wizard.method, resultScenario: wizard.resultScenario, ...resolved };
   let fieldsDef;
   if (wizard.flow === "payin" && wizard.integrationType === "checkout") fieldsDef = checkoutFields(ctx);
   else if (wizard.flow === "payin") fieldsDef = directPayinFields(ctx);
@@ -301,6 +315,13 @@ function detailsBody() {
     const formNode = el("div", { class: "details-form" }, fieldsDef.map((f) => field(f)));
     formNode.addEventListener("input", updatePreview);
     formNode.addEventListener("change", updatePreview);
+    formNode.addEventListener("focusout", (e) => {
+      if (e.target.matches("input, select, textarea")) e.target.classList.add("ps-input--touched");
+    });
+    if (isPayout) {
+      const scenarioSelect = formNode.querySelector('[name="result_scenario"]');
+      scenarioSelect?.addEventListener("change", (e) => applyPayoutScenario(formNode, e.target.value));
+    }
     detailsFormCache = { signature, el: formNode };
   }
   const formEl = detailsFormCache.el;
@@ -314,7 +335,12 @@ function detailsBody() {
   if (warning) submitBtn.disabled = true;
 
   const nodes = [
-    warning ? el("div", { class: "alert alert--atenção" }, warning) : null,
+    warning
+      ? el("div", { class: "alert alert--atenção alert--with-action" }, [
+          el("span", {}, warning),
+          el("button", { class: "btn btn-outline btn-sm", type: "button", onclick: openCredsDialog }, t("open_credentials_button")),
+        ])
+      : null,
     el("p", { class: "required-legend" }, t("required_legend")),
     formEl,
     el("div", { class: "details-form__actions" }, [submitBtn]),
@@ -376,6 +402,7 @@ async function onSubmit(formEl) {
       country: wizard.country,
       methodInfo: wizard.method,
       values,
+      resultScenario: wizard.resultScenario,
       ...resolved,
     });
     const response = await sendRequest(spec);
@@ -446,6 +473,7 @@ function buildPreviewContext() {
     country: wizard.country,
     methodInfo: wizard.method,
     values,
+    resultScenario: wizard.resultScenario,
     ...resolved,
   };
 }
@@ -476,13 +504,13 @@ function renderRequestInfo(spec) {
 
 function renderCurl() {
   if (!lastSpec) return;
-  curlOutputEl.textContent = buildCurl(lastSpec);
+  renderHighlightedCode(curlOutputEl, buildCurl(lastSpec), lastSpec.requiredKeys);
   renderRequestInfo(lastSpec);
 }
 
 function renderCode() {
   if (!lastSpec) return;
-  codeOutputEl.textContent = CODE_BUILDERS[activeCodeLang](lastSpec);
+  renderHighlightedCode(codeOutputEl, CODE_BUILDERS[activeCodeLang](lastSpec), lastSpec.requiredKeys);
 }
 
 async function updatePreview() {
@@ -533,7 +561,7 @@ function refreshCredsDialogContent() {
   renderCredentialsHub(credsBody, creds, (newCreds) => {
     creds = newCreds;
     saveCreds(creds);
-    updatePreview();
+    render();
   });
 }
 
@@ -563,6 +591,8 @@ function applyStaticTranslations() {
   document.getElementById("code-title").textContent = t("code_panel_title");
   copyCurlBtn.textContent = t("copy_button");
   copyCodeBtn.textContent = t("copy_button");
+  supportFloatBtn.textContent = t("support_cta_button");
+  supportFloatBtn.setAttribute("aria-label", t("support_cta_button"));
   langPtBtn.classList.toggle("lang-switch__btn--active", getLang() === "pt");
   langEnBtn.classList.toggle("lang-switch__btn--active", getLang() === "en");
   langZhBtn.classList.toggle("lang-switch__btn--active", getLang() === "zh");
@@ -583,9 +613,46 @@ function render() {
   // choice onward (with <PLACEHOLDER> tokens for anything not chosen yet).
   if (wizard.flow) updatePreview();
   else showPreviewPlaceholder();
-  renderHints(hintsPanelEl, { flow: wizard.flow, country: wizard.country });
+  renderReferences(referencesPanelEl, {
+    flow: wizard.flow,
+    country: wizard.country,
+    methodInfo: wizard.method,
+    integrationType: wizard.integrationType,
+  });
 }
 
+function tryOpenSupportWidget() {
+  const zE = window.zE;
+  if (typeof zE !== "function") return false;
+  // Zendesk Messenger widget.
+  try {
+    zE("messenger", "open");
+    return true;
+  } catch {
+    /* not the Messenger widget */
+  }
+  // Fallback for accounts still on the classic Web Widget.
+  try {
+    zE("webWidget", "open");
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function openSupportWidget() {
+  if (tryOpenSupportWidget()) return;
+  // The Zendesk snippet loads asynchronously; poll briefly in case the
+  // merchant clicks before it's ready.
+  let attempts = 0;
+  const interval = setInterval(() => {
+    attempts += 1;
+    if (tryOpenSupportWidget() || attempts >= 20) clearInterval(interval);
+  }, 250);
+}
+window.__pagsmileOpenSupport = openSupportWidget;
+
+supportFloatBtn.addEventListener("click", openSupportWidget);
 resetBtn.addEventListener("click", resetWizard);
 credsBtn.addEventListener("click", openCredsDialog);
 credsCloseBtn.addEventListener("click", () => credsDialog.close());

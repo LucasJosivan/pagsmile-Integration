@@ -32,7 +32,7 @@
   <main class="workbench">
     <section class="workbench__form">
       <div id="form-column"></div>
-      <div class="preview-card hints-card" id="hints-panel"></div>
+      <div class="preview-card hints-card" id="references-panel"></div>
     </section>
 
     <aside class="workbench__preview">
@@ -67,7 +67,9 @@
 
   <footer id="app-footer-text" class="app-footer"></footer>
 
-  <dialog id="creds-dialog" class="creds-dialog">
+  <button id="support-float-btn" class="support-float-btn" type="button" aria-label="Support"></button>
+
+  <dialog id="creds-dialog" class="creds-dialog"
     <div class="creds-dialog__inner">
       <div class="creds-dialog__header">
         <h3 id="creds-title">Credentials</h3>
@@ -78,5 +80,9 @@
   </dialog>
 
   <script type="module" src="js/app.js"></script>
+
+  <!-- Start of pagsmileglobal Zendesk Widget script -->
+  <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=f70c27dc-df1f-4a59-8516-a1d431cb24b2"> </script>
+  <!-- End of pagsmileglobal Zendesk Widget script -->
 </body>
 </html>
